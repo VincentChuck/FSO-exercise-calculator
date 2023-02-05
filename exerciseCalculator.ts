@@ -6,8 +6,8 @@ interface ExerciseInput {
 const processArguments = (args: Array<string>): ExerciseInput => {
   if (args.length < 4) throw new Error('Not enough arguments');
 
-  let target;
-  let training = [];
+  let target = 0;
+  const training = [];
 
   for (let i = 2; i < args.length; i++) {
     if (!isNaN(Number(args[i]))) {
@@ -68,8 +68,10 @@ const calculateExercises = (
 };
 
 try {
-  const { target, training } = processArguments(process.argv);
-  console.log(calculateExercises(target, training));
+  if (process.argv[1] !== 'index.ts') {
+    const { target, training } = processArguments(process.argv);
+    console.log(calculateExercises(target, training));
+  }
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {
@@ -77,3 +79,5 @@ try {
   }
   console.log(errorMessage);
 }
+
+export default calculateExercises;

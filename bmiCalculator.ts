@@ -29,8 +29,10 @@ const calculateBmi = (height: number, weight: number) => {
 };
 
 try {
-  const { value1, value2 } = parseArguments(process.argv);
-  console.log(calculateBmi(value1, value2));
+  if (process.argv[1] !== 'index.ts') {
+    const { value1, value2 } = parseArguments(process.argv);
+    console.log(calculateBmi(value1, value2));
+  }
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {
